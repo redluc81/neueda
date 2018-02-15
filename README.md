@@ -1,6 +1,8 @@
-Docker version 17.12.0-ce on Ubuntu 16.04 LTS
+A Spring Boot app with Docker version 17.12.0-ce on Ubuntu 16.04 LTS
 
-- Launch the Maven goal using the docker maven plugin
+List of Docker commands:
+
+- Launch the Maven goal using the docker spotify maven plugin
      
       mvn clean package docker:build
      
@@ -8,11 +10,11 @@ Docker version 17.12.0-ce on Ubuntu 16.04 LTS
      
       docker build -t <image-name> .
      
-- Publish the image in a repository you have to have an account on 
+- To publish the image in a repository you have to have an account on 
      
       https://hub.docker.com
 
-- Login
+- Login and insert your credentials
 
       docker login
 
@@ -31,6 +33,10 @@ Docker version 17.12.0-ce on Ubuntu 16.04 LTS
 - Delete an image:
 
       docker rmi <image-id>
+      
+- Delete all images
+
+       docker rmi $(docker images -q)
 
 - See all containres
     
@@ -38,6 +44,31 @@ Docker version 17.12.0-ce on Ubuntu 16.04 LTS
 
 - Stop a container
    
-      docker stop <container-id>       
+      docker stop <container-id> 
+      
+- Remove all containers
+
+      docker rm $(docker ps -a -q) 
+ 
+  
+ - Make your machine a node manager
+ 
+       docker swarm init
+       
+  - Deploy the services configured in a docker-compoose.yml
+   
+       docker stack deploy -c docker-compose.yml <app_name> 
+   
+   - See the services running
+   
+       docker service ls
+   
+   - Remove the service stack
+   
+       docker stack rm <app_name>
+          
+   -  Exit from the node manager
+   
+       docker swarm leave -f              
 
 
